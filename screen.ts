@@ -12,6 +12,8 @@ namespace a4_ms_stationnement {
         Large = 1,
         //% block="petite"
         Small = 2,
+        //% block="très grande"
+        XLarge = 3,
     }
 
     export enum ProtocoleEcran {
