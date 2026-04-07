@@ -3,8 +3,7 @@
   "description": "Extension pour la maquette de borne de stationnement limité (ms-stationnement)",
   "license": "MIT",
   "dependencies": {
-    "core": "*",
-    "DFRobot_lcdDisplay": "github:DFRobot/pxt-DFRobot_lcdDisplay"
+    "core": "*"
   },
   "files": [
     "main.ts",
