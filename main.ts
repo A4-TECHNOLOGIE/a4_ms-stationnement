@@ -1,4 +1,5 @@
 //% weight=100 color=#0fbc11 icon="\uf085"
+//% groups="['Système', 'Capteurs', 'Écran']"
 namespace a4_ms_stationnement {
 
     const I2C_ADDR = 0x33
@@ -43,6 +44,7 @@ namespace a4_ms_stationnement {
 
     //% block="niveau de batterie (%)"
     //% group="Système"
+    //% color=#0fbc11
     //% weight=100
     export function niveauBatterie(): number {
         init()
@@ -54,6 +56,7 @@ namespace a4_ms_stationnement {
     //% g.min=0 g.max=255
     //% b.min=0 b.max=255
     //% group="Système"
+    //% color=#0fbc11
     //% weight=90
     export function setRGB(index: RGBIndex, r: number, g: number, b: number) {
         init()
@@ -82,6 +85,7 @@ namespace a4_ms_stationnement {
 
     //% block="mettre %index en couleur %color"
     //% group="Système"
+    //% color=#0fbc11
     //% weight=80
     export function setRGBColor(index: RGBIndex, color: RGBColor) {
         let r = 0
@@ -105,6 +109,7 @@ namespace a4_ms_stationnement {
     //% block="régler luminosité RGB à %b"
     //% b.min=0 b.max=255
     //% group="Système"
+    //% color=#0fbc11
     //% weight=70
     export function setBrightness(b: number) {
         globalBrightness = Math.clamp(0, 255, b)
@@ -112,30 +117,28 @@ namespace a4_ms_stationnement {
 
     //% block="éteindre les LED RGB"
     //% group="Système"
+    //% color=#0fbc11
     //% weight=60
     export function clearRGB() {
         setRGB(RGBIndex.Both, 0, 0, 0)
     }
 
     // =========================
-    // CAPTEUR
+    // CAPTEURS
     // =========================
 
     //% block="présence d'un véhicule"
-    //% group="Capteur"
+    //% group="Capteurs"
+    //% color=#ff4fa3
     //% weight=100
     export function presenceVehicule(): boolean {
         init()
-
-        // Si ton capteur est actif à l'état haut, garder cette ligne :
         return readDigital(IO.C0) == 1
-
-        // Si ton capteur fonctionne à l'inverse, remplacer par :
-        // return readDigital(IO.C0) == 0
     }
 
     //% block="niveau d'intensité lumineuse"
-    //% group="Capteur"
+    //% group="Capteurs"
+    //% color=#ff4fa3
     //% weight=90
     export function niveauLuminosite(): number {
         return input.lightLevel()
