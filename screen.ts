@@ -25,6 +25,7 @@ namespace a4_ms_stationnement {
     const CMD_DELETE_OBJ_LEN = 0x06
     const CMD_SET_LEN = 0x07
     const CMD_SET_ANGLE_OBJ_LEN = 0x08
+    const CMD_SET_ANGLE_OBJ = 0x1E
 
     const CMD_SET_BACKGROUND_COLOR = 0x19
     const CMD_SET_BACKGROUND_IMG = 0x1A
