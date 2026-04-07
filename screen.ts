@@ -13,7 +13,7 @@ namespace a4_ms_stationnement {
         //% block="petite"
         Small = 2,
         //% block="très grande"
-        XLarge = 3,
+        XLarge = 0,
     }
 
     export enum ProtocoleEcran {
