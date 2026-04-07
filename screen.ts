@@ -797,6 +797,13 @@ namespace a4_ms_stationnement {
         return 1
     }
 
+    function deleteChart(id: number) {
+        let cmd = creatCommand(CMD_DELETE_OBJ, CMD_DELETE_OBJ_LEN)
+        cmd = cmd.concat([CMD_OF_DRAW_LINE_CHART, id])
+        writeCommand(cmd, CMD_DELETE_OBJ_LEN)
+        deleteNodeByID(list.lineChartHead, id)
+    }
+
     function setMeterValue(lineMeterId: number, value: number) {
         let cmd = creatCommand(CMD_OF_DRAW_LINE_METER_VALUE, CMD_SET_LINE_METER_VALUE_LEN)
         cmd = cmd.concat([lineMeterId]).concat(data16Tobyte(value))
