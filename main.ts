@@ -51,37 +51,38 @@ namespace a4_ms_stationnement {
         return readReg(0x87, 1)[0]
     }
 
-    //% block="mettre %index en R %r G %g B %b"
-    //% r.min=0 r.max=255
-    //% g.min=0 g.max=255
-    //% b.min=0 b.max=255
-    //% group="Système"
-    //% color=#0fbc11
-    //% weight=90
-    export function setRGB(index: RGBIndex, r: number, g: number, b: number) {
-        init()
+//% block="mettre %index rouge %r vert %g bleu %b"
+//% r.min=0 r.max=255
+//% g.min=0 g.max=255
+//% b.min=0 b.max=255
+//% inlineInputMode=inline
+//% group="Système"
+//% color=#0fbc11
+//% weight=90
+export function setRGB(index: RGBIndex, r: number, g: number, b: number) {
+    init()
 
-        let buf = pins.createBuffer(8)
-        buf[0] = 1
-        buf[1] = globalBrightness
+    let buf = pins.createBuffer(8)
+    buf[0] = 1
+    buf[1] = globalBrightness
 
-        function setColor(offset: number) {
-            buf[offset] = r
-            buf[offset + 1] = g
-            buf[offset + 2] = b
-        }
-
-        if (index == RGBIndex.RGB0) {
-            setColor(2)
-        } else if (index == RGBIndex.RGB1) {
-            setColor(5)
-        } else {
-            setColor(2)
-            setColor(5)
-        }
-
-        writeReg(0x90, buf)
+    function setColor(offset: number) {
+        buf[offset] = r
+        buf[offset + 1] = g
+        buf[offset + 2] = b
     }
+
+    if (index == RGBIndex.RGB0) {
+        setColor(2)
+    } else if (index == RGBIndex.RGB1) {
+        setColor(5)
+    } else {
+        setColor(2)
+        setColor(5)
+    }
+
+    writeReg(0x90, buf)
+}
 
     //% block="mettre %index en couleur %color"
     //% group="Système"
