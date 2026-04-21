@@ -42,7 +42,7 @@ namespace a4_ms_stationnement {
     // SYSTÈME
     // =========================
 
-    //% block="niveau de batterie (%)"
+    //% block="niveau de batterie (//%)"
     //% group="Système"
     //% color=#0fbc11
     //% weight=100
