@@ -44,6 +44,14 @@ Elle regroupe des blocs simples pour :
 - écran **DFR compatible**
 - capteur de proximité raccordé sur **C0**
 
+## Licence
+
+Ce projet est distribué sous licence **MIT**.
+
+## Supported targets
+
+* for PXT/microbit
+
 ## Exemple
 
 ```typescript
@@ -76,11 +84,3 @@ basic.forever(function () {
         )
     }
 })
-
-## Licence
-
-Ce projet est distribué sous licence **MIT**.
-
-## Supported targets
-
-* for PXT/microbit
