@@ -6,6 +6,15 @@ namespace a4_ms_stationnement {
     let initialized = false
     let globalBrightness = 255
 
+    // Mémorisation de l'état des 2 LED RGB
+    let rgb0_r = 0
+    let rgb0_g = 0
+    let rgb0_b = 0
+
+    let rgb1_r = 0
+    let rgb1_g = 0
+    let rgb1_b = 0
+
     function init() {
         if (!initialized) {
             initialized = true
@@ -38,6 +47,23 @@ namespace a4_ms_stationnement {
         return readReg(0x3f + io, 1)[0]
     }
 
+    function writeRGBState() {
+        let buf = pins.createBuffer(8)
+
+        buf[0] = 1
+        buf[1] = globalBrightness
+
+        buf[2] = rgb0_r
+        buf[3] = rgb0_g
+        buf[4] = rgb0_b
+
+        buf[5] = rgb1_r
+        buf[6] = rgb1_g
+        buf[7] = rgb1_b
+
+        writeReg(0x90, buf)
+    }
+
     // =========================
     // SYSTÈME
     // =========================
@@ -51,38 +77,41 @@ namespace a4_ms_stationnement {
         return readReg(0x87, 1)[0]
     }
 
-//% block="mettre %index rouge %r vert %g bleu %b"
-//% r.min=0 r.max=255
-//% g.min=0 g.max=255
-//% b.min=0 b.max=255
-//% inlineInputMode=inline
-//% group="Système"
-//% color=#0fbc11
-//% weight=90
-export function setRGB(index: RGBIndex, r: number, g: number, b: number) {
-    init()
+    //% block="mettre %index en R %r G %g B %b"
+    //% r.min=0 r.max=255
+    //% g.min=0 g.max=255
+    //% b.min=0 b.max=255
+    //% inlineInputMode=inline
+    //% group="Système"
+    //% color=#0fbc11
+    //% weight=90
+    export function setRGB(index: RGBIndex, r: number, g: number, b: number) {
+        init()
 
-    let buf = pins.createBuffer(8)
-    buf[0] = 1
-    buf[1] = globalBrightness
+        r = Math.clamp(0, 255, r)
+        g = Math.clamp(0, 255, g)
+        b = Math.clamp(0, 255, b)
 
-    function setColor(offset: number) {
-        buf[offset] = r
-        buf[offset + 1] = g
-        buf[offset + 2] = b
+        if (index == RGBIndex.RGB0) {
+            rgb0_r = r
+            rgb0_g = g
+            rgb0_b = b
+        } else if (index == RGBIndex.RGB1) {
+            rgb1_r = r
+            rgb1_g = g
+            rgb1_b = b
+        } else {
+            rgb0_r = r
+            rgb0_g = g
+            rgb0_b = b
+
+            rgb1_r = r
+            rgb1_g = g
+            rgb1_b = b
+        }
+
+        writeRGBState()
     }
-
-    if (index == RGBIndex.RGB0) {
-        setColor(2)
-    } else if (index == RGBIndex.RGB1) {
-        setColor(5)
-    } else {
-        setColor(2)
-        setColor(5)
-    }
-
-    writeReg(0x90, buf)
-}
 
     //% block="mettre %index en couleur %color"
     //% group="Système"
@@ -113,7 +142,9 @@ export function setRGB(index: RGBIndex, r: number, g: number, b: number) {
     //% color=#0fbc11
     //% weight=70
     export function setBrightness(b: number) {
+        init()
         globalBrightness = Math.clamp(0, 255, b)
+        writeRGBState()
     }
 
     //% block="éteindre les LED RGB"
