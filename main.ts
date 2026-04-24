@@ -6,15 +6,6 @@ namespace a4_ms_stationnement {
     let initialized = false
     let globalBrightness = 255
 
-    // Mémorisation de l'état des 2 LED RGB
-    let rgb0_r = 0
-    let rgb0_g = 0
-    let rgb0_b = 0
-
-    let rgb1_r = 0
-    let rgb1_g = 0
-    let rgb1_b = 0
-
     function init() {
         if (!initialized) {
             initialized = true
@@ -47,21 +38,36 @@ namespace a4_ms_stationnement {
         return readReg(0x3f + io, 1)[0]
     }
 
-    function writeRGBState() {
-        let buf = pins.createBuffer(8)
+    function writeRGBValues(r0: number, g0: number, b0: number, r1: number, g1: number, b1: number) {
+        init()
 
+        let buf = pins.createBuffer(8)
         buf[0] = 1
         buf[1] = globalBrightness
 
-        buf[2] = rgb0_r
-        buf[3] = rgb0_g
-        buf[4] = rgb0_b
+        buf[2] = Math.clamp(0, 255, r0)
+        buf[3] = Math.clamp(0, 255, g0)
+        buf[4] = Math.clamp(0, 255, b0)
 
-        buf[5] = rgb1_r
-        buf[6] = rgb1_g
-        buf[7] = rgb1_b
+        buf[5] = Math.clamp(0, 255, r1)
+        buf[6] = Math.clamp(0, 255, g1)
+        buf[7] = Math.clamp(0, 255, b1)
 
         writeReg(0x90, buf)
+    }
+
+    function colorToRGB(color: RGBColor): number[] {
+        switch (color) {
+            case RGBColor.Red: return [255, 0, 0]
+            case RGBColor.Green: return [0, 255, 0]
+            case RGBColor.Blue: return [0, 0, 255]
+            case RGBColor.Yellow: return [255, 255, 0]
+            case RGBColor.Cyan: return [0, 255, 255]
+            case RGBColor.Magenta: return [255, 0, 255]
+            case RGBColor.White: return [255, 255, 255]
+            case RGBColor.Off:
+            default: return [0, 0, 0]
+        }
     }
 
     // =========================
@@ -77,63 +83,30 @@ namespace a4_ms_stationnement {
         return readReg(0x87, 1)[0]
     }
 
-    //% block="mettre %index en R %r G %g B %b"
-    //% r.min=0 r.max=255
-    //% g.min=0 g.max=255
-    //% b.min=0 b.max=255
+    //% block="mettre RGB0 en %color0 et RGB1 en %color1"
     //% inlineInputMode=inline
     //% group="Système"
     //% color=#0fbc11
     //% weight=90
-    export function setRGB(index: RGBIndex, r: number, g: number, b: number) {
-        init()
-
-        r = Math.clamp(0, 255, r)
-        g = Math.clamp(0, 255, g)
-        b = Math.clamp(0, 255, b)
-
-        if (index == RGBIndex.RGB0) {
-            rgb0_r = r
-            rgb0_g = g
-            rgb0_b = b
-        } else if (index == RGBIndex.RGB1) {
-            rgb1_r = r
-            rgb1_g = g
-            rgb1_b = b
-        } else {
-            rgb0_r = r
-            rgb0_g = g
-            rgb0_b = b
-
-            rgb1_r = r
-            rgb1_g = g
-            rgb1_b = b
-        }
-
-        writeRGBState()
+    export function setTwoRGBColors(color0: RGBColor, color1: RGBColor) {
+        let c0 = colorToRGB(color0)
+        let c1 = colorToRGB(color1)
+        writeRGBValues(c0[0], c0[1], c0[2], c1[0], c1[1], c1[2])
     }
 
-    //% block="mettre %index en couleur %color"
+    //% block="mettre RGB0 en R %r0 G %g0 B %b0 et RGB1 en R %r1 G %g1 B %b1"
+    //% r0.min=0 r0.max=255
+    //% g0.min=0 g0.max=255
+    //% b0.min=0 b0.max=255
+    //% r1.min=0 r1.max=255
+    //% g1.min=0 g1.max=255
+    //% b1.min=0 b1.max=255
+    //% inlineInputMode=inline
     //% group="Système"
     //% color=#0fbc11
     //% weight=80
-    export function setRGBColor(index: RGBIndex, color: RGBColor) {
-        let r = 0
-        let g = 0
-        let b = 0
-
-        switch (color) {
-            case RGBColor.Red: r = 255; break
-            case RGBColor.Green: g = 255; break
-            case RGBColor.Blue: b = 255; break
-            case RGBColor.Yellow: r = 255; g = 255; break
-            case RGBColor.Cyan: g = 255; b = 255; break
-            case RGBColor.Magenta: r = 255; b = 255; break
-            case RGBColor.White: r = 255; g = 255; b = 255; break
-            case RGBColor.Off: default: break
-        }
-
-        setRGB(index, r, g, b)
+    export function setTwoRGB(r0: number, g0: number, b0: number, r1: number, g1: number, b1: number) {
+        writeRGBValues(r0, g0, b0, r1, g1, b1)
     }
 
     //% block="régler luminosité RGB à %b"
@@ -142,9 +115,7 @@ namespace a4_ms_stationnement {
     //% color=#0fbc11
     //% weight=70
     export function setBrightness(b: number) {
-        init()
         globalBrightness = Math.clamp(0, 255, b)
-        writeRGBState()
     }
 
     //% block="éteindre les LED RGB"
@@ -152,7 +123,7 @@ namespace a4_ms_stationnement {
     //% color=#0fbc11
     //% weight=60
     export function clearRGB() {
-        setRGB(RGBIndex.Both, 0, 0, 0)
+        writeRGBValues(0, 0, 0, 0, 0, 0)
     }
 
     // =========================
