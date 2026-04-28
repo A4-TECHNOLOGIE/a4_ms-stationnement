@@ -4,6 +4,13 @@ MakeCode extension for the **A4 limited parking station model** based on the **D
 
 ![A4 ms stationnement](icon.png)
 
+## Product page and teaching resources
+
+Product information and educational resources currently in development will soon be available on **a4.fr**.
+
+Website:
+https://www.a4.fr
+
 ## Purpose
 
 This extension is designed for an educational parking timer model used in technology lessons.
