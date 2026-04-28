@@ -1,15 +1,17 @@
 {
   "name": "a4_ms-stationnement",
-  "description": "Extension pour la maquette de borne de stationnement limité (ms-stationnement)",
+  "version": "1.0.2",
+  "description": "MakeCode extension for the A4 limited parking station model based on the DFR1216 expansion board and BBC micro:bit.",
   "license": "MIT",
   "dependencies": {
     "core": "*"
   },
   "files": [
     "main.ts",
-    "screen.ts",
-    "enums.ts",
     "README.md"
+  ],
+  "testFiles": [
+    "test.ts"
   ],
   "supportedTargets": [
     "microbit"
