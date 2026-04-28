@@ -87,12 +87,6 @@ basic.forever(function () {
 })
 ```
 
-## Compatibility
-
-This extension is intended for use with the DFR1216 expansion board and BBC micro:bit.
-
-If you want to submit this repository for approval, make sure the compatibility statement in the GitHub description, icon, and support request matches the hardware you have tested.
-
 ## License
 
 MIT
