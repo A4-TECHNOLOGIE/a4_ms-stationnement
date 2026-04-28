@@ -1,4 +1,4 @@
-# a4_ms-stationnement
+# a4ParkingStation
 
 MakeCode extension for the **A4 limited parking station model** based on the **DFR1216 expansion board**, **BBC micro:bit**, a **DFR-compatible screen**, and a **proximity sensor connected to C0**.
 
