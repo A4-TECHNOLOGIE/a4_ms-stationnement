@@ -9,8 +9,8 @@
   "files": [
     "main.ts",
     "README.md",
-    "_locales/fr/strings.json",
-    "_locales/fr/jsdoc-strings.json"
+    "_locales/fr/a4_ms-stationnement-strings.json",
+    "_locales/fr/a4_ms-stationnement-jsdoc-strings.json"
   ],
   "testFiles": [
     "test.ts"
