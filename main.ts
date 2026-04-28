@@ -356,7 +356,7 @@ namespace a4ParkingStation {
     /**
      * Returns the battery level in percent.
      */
-    //% block="battery level (%)"
+    //% block="battery level (\\%)"
     //% group="System"
     //% color=#0fbc11
     //% weight=100
