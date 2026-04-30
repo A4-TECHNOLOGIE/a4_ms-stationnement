@@ -11,6 +11,8 @@ Product information and educational resources currently in development will soon
 Website:
 https://www.a4.fr
 
+Product sheet : https://github.com/A4-TECHNOLOGIE/a4_ms-stationnement/blob/main/docs/Product%20sheet%20EN.pdf
+
 ## Purpose
 
 This extension is designed for an educational parking timer model used in technology lessons.
