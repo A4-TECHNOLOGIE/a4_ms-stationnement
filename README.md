@@ -58,7 +58,7 @@ It provides simple blocks to:
 
 ## Example
 
-```blocks
+```block
 basic.showNumber(a4ParkingStation.batteryLevel())
 a4ParkingStation.initScreenI2C()
 a4ParkingStation.setScreenBackgroundColor(
