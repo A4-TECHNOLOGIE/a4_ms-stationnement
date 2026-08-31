@@ -34,8 +34,8 @@
   "a4ParkingStation.showScreenImage|block": "écran afficher image numéro %id nom %name position x %x y %y taille %size",
   "a4ParkingStation.showScreenText|block": "écran afficher texte %text numéro %id position x %x y %y taille %size couleur %color",
   "a4ParkingStation.vehiclePresent|block": "présence d'un véhicule",
-  "a4ParkingStation|block": "A4 ms-stationnement",
-  "{id:category}A4ParkingStation": "A4 ms-stationnement",
+  "a4ParkingStation|block": "a4 microSySTEM Parking",
+  "{id:category}A4ParkingStation": "a4 microSySTEM Parking",
   "{id:group}Screen": "Écran",
   "{id:group}Sensors": "Capteurs",
   "{id:group}System": "Système"
