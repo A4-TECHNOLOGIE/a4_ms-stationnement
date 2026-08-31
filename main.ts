@@ -2,7 +2,7 @@
  * MakeCode extension for the A4 limited parking station model
  * based on the DFR1216 expansion board and BBC micro:bit.
  */
-//% weight=100 color=#0fbc11 icon="\uf085" block="A4 parking station"
+//% weight=100 color=#0fbc11 icon="\uf085" block="a4 microSySTEM Parking"
 //% groups='["System", "Sensors", "Screen"]'
 namespace a4ParkingStation {
     const BOARD_I2C_ADDR = 0x33
